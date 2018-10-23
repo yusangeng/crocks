@@ -41,6 +41,7 @@ const tap = require('./tap')
 const unary = require('./unary')
 const unit = require('./unit')
 const unsetPath = require('./unsetPath')
+const unsetProp = require('./unsetProp')
 
 test('helpers entry', t => {
   t.equal(index.assign, assign, 'provides the assign helper')
@@ -82,6 +83,7 @@ test('helpers entry', t => {
   t.equal(index.unary, unary, 'provides the unary helper')
   t.equal(index.unit, unit, 'provides the unit helper')
   t.equal(index.unsetPath, unsetPath, 'provides the unsetPath helper')
+  t.equal(index.unsetProp, unsetProp, 'provides the unsetProp helper')
 
   t.end()
 })

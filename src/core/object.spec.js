@@ -7,6 +7,7 @@ const object = require('./object')
 const assign = object.assign
 const filter = object.filter
 const map = object.map
+const unset = object.unset
 
 const identity = x => x
 
@@ -69,6 +70,18 @@ test('object map properties (Functor)', t => {
 
   t.same(map(identity, m), m, 'identity')
   t.same(map(compose(f, g), m), map(f, map(g, m)), 'composition')
+
+  t.end()
+})
+
+test('object unset functionality', t => {
+  const undefs = { a: undefined, b: undefined }
+  t.same(unset('', undefs), {}, 'removes undefined values')
+
+  const defs = { a: 1, b: 2 }
+  t.same(unset('', defs), defs, 'empty string returns with nothing removed')
+  t.notEqual(unset('', defs), defs, 'returns a new object')
+  t.same(unset('a', defs), { b: 2 }, 'returns a new object with specified key removed')
 
   t.end()
 })

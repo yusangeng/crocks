@@ -12,6 +12,15 @@ function rejectUnit(obj) {
   }
 }
 
+function applyUnset(key, obj) {
+  return function(acc, k) {
+    if(obj[k] !== undefined && k !== key) {
+      acc[k] = obj[k]
+    }
+    return acc
+  }
+}
+
 function assign(x, m) {
   const result = Object.keys(m).reduce(rejectUnit(m), {})
   return Object.keys(x).reduce(rejectUnit(x), result)
@@ -33,8 +42,14 @@ function map(f, m) {
   }, {})
 }
 
+function unset(key, m) {
+  return Object.keys(m)
+    .reduce(applyUnset(key, m), {})
+}
+
 module.exports = {
   assign,
   filter,
-  map
+  map,
+  unset
 }

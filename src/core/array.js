@@ -122,6 +122,9 @@ function foldMap(fn, m) {
     }, head)
 }
 
+const unset = (indx, m) =>
+  m.slice(0, indx).concat(m.slice(indx + 1))
+
 module.exports = {
-  ap, chain, fold, foldMap, map, sequence, traverse
+  ap, chain, fold, foldMap, map, sequence, traverse, unset
 }
