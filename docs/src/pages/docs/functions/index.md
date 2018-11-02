@@ -66,7 +66,7 @@ need to account for for the rest of your flow.
 | [`curry`][curry] | `((a, b, ...) -> z) -> a -> b -> ... -> z` | `crocks/helpers/curry` |
 | [`defaultProps`][defaultprops] | `Object -> Object -> Object` | `crocks/helpers/defaultProps` |
 | [`defaultTo`][defaultto] | `a -> b -> a` | `crocks/helpers/defaultTo` |
-| [`dissoc`][dissoc] | `String -> Object -> Object` | `crocks/helpers/dissoc` |
+| [`dissoc`][unsetprop]<br /><i>(deprecated)</i> | `String -> Object -> Object` | `crocks/helpers/dissoc` |
 | [`fanout`][fanout] | `(a -> b) -> (a -> c) -> (a -> Pair b c)` | `crocks/helpers/fanout` |
 | [`find`][find] | <code>Foldable f => ((a -> Boolean) &#124; Pred) -> f a -> Maybe a</code> | `crocks/helpers/find` |
 | [`fromPairs`][frompairs] | `Foldable f => f (Pair String a) -> Object` | `crocks/helpers/fromPairs` |
@@ -103,6 +103,7 @@ need to account for for the rest of your flow.
 | [`unary`][unary] | `((*) -> b) -> a -> b` | `crocks/helpers/unary` |
 | [`unit`][unit] | `() -> undefined` | `crocks/helpers/unit` |
 | [`unsetPath`][unsetpath] |  <code>[ String &#124; Integer] -> (Object &#124; Array) -> (Object &#124; Array)</code>  | `crocks/helpers/unsetPath` |
+| [`unsetProp`][unsetprop] | `String -> Object -> Object` | `crocks/helpers/unsetProp` |
 
 ## Logic
 
@@ -143,7 +144,6 @@ type: `Pred a` and vice-versa
 [curry]: helpers.html#curry
 [defaultprops]: helpers.html#defaultprops
 [defaultto]: helpers.html#defaultto
-[dissoc]: helpers.html#dissoc
 [fanout]: helpers.html#fanout
 [find]: ../crocks/Maybe.html#find
 [frompairs]: helpers.html#frompairs
@@ -180,6 +180,7 @@ type: `Pred a` and vice-versa
 [unary]: helpers.html#unary
 [unit]: helpers.html#unit
 [unsetpath]: helpers.html#unsetpath
+[unsetprop]: helpers.html#unsetprop
 
 [and]: logic-functions.html#and
 [ifelse]: logic-functions.html#ifelse
