@@ -6,14 +6,14 @@ const bindFunc = helpers.bindFunc
 const isFunction = require('../core/isFunction')
 const unit =  Function.prototype
 
-const dissoc = require('./dissoc')
+const unsetProp = require('./unsetProp')
 
-test('dissoc helper function', t => {
-  t.ok(isFunction(dissoc), 'is a function')
+test('unsetProp helper function', t => {
+  t.ok(isFunction(unsetProp), 'is a function')
 
-  const fn = bindFunc(dissoc)
+  const fn = bindFunc(unsetProp)
 
-  const err = /dissoc: Object or Array required for second argument/
+  const err = /unsetProp: Object or Array required for second argument/
   t.throws(fn('key', undefined), err, 'throws when second arg is undefined')
   t.throws(fn('key', null), err, 'throws when second arg is null')
   t.throws(fn('key', 0), err, 'throws when second arg is falsey number')
@@ -26,10 +26,10 @@ test('dissoc helper function', t => {
   t.end()
 })
 
-test('dissoc with Object', t => {
-  const fn = bindFunc(dissoc)
+test('unsetProp with Object', t => {
+  const fn = bindFunc(unsetProp)
 
-  const noString = /dissoc: Non-empty String required for first argument/
+  const noString = /unsetProp: Non-empty String required for first argument/
   t.throws(fn(undefined, {}), noString, 'throws when first arg is undefined')
   t.throws(fn(null, {}), noString, 'throws when first arg is null')
   t.throws(fn('', {}), noString, 'throws when first arg is empty string')
@@ -42,19 +42,19 @@ test('dissoc with Object', t => {
   t.throws(fn([], {}), noString, 'throws when first arg is an array')
 
   const undefs = { a: undefined, b: undefined }
-  t.same(dissoc('key', undefs), {}, 'removes undefined values')
+  t.same(unsetProp('key', undefs), {}, 'removes undefined values')
 
   const defs = { a: 1, b: 2 }
-  t.notEqual(dissoc('key', defs), defs, 'returns a new object')
-  t.same(dissoc('a', defs), { b: 2 }, 'returns a new object with specified key removed')
+  t.notEqual(unsetProp('key', defs), defs, 'returns a new object')
+  t.same(unsetProp('a', defs), { b: 2 }, 'returns a new object with specified key removed')
 
   t.end()
 })
 
-test('dissoc with Array', t => {
-  const fn = bindFunc(dissoc)
+test('unsetProp with Array', t => {
+  const fn = bindFunc(unsetProp)
 
-  const noInt = /dissoc: Positive Integer required for first argument when second argument is an Array/
+  const noInt = /unsetProp: Positive Integer required for first argument when second argument is an Array/
   t.throws(fn(undefined, []), noInt, 'throws when first arg is undefined')
   t.throws(fn(null, []), noInt, 'throws when first arg is null')
   t.throws(fn('', []), noInt, 'throws when first arg is falsey string')
@@ -66,13 +66,13 @@ test('dissoc with Array', t => {
   t.throws(fn([], []), noInt, 'throws when first arg is an array')
 
   const undefs = [ undefined, undefined ]
-  t.same(dissoc(0, undefs), [ undefined ], 'does not remove undefined values')
+  t.same(unsetProp(0, undefs), [ undefined ], 'does not remove undefined values')
 
   const defs = [ 34, 99, 'string' ]
-  t.same(dissoc(3, defs), defs, 'keeps items when index does not exist')
-  t.notEqual(dissoc(3, defs), defs, 'returns a new object')
+  t.same(unsetProp(3, defs), defs, 'keeps items when index does not exist')
+  t.notEqual(unsetProp(3, defs), defs, 'returns a new object')
 
-  t.same(dissoc(1, defs), [ 34, 'string' ], 'removes item at index without holes')
+  t.same(unsetProp(1, defs), [ 34, 'string' ], 'removes item at index without holes')
 
   t.end()
 })
